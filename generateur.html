@@ -29,7 +29,7 @@
 		var Li = document.createElement("li");
 		var Lien = document.createElement("a");
 		var Att = document.createAttribute("href");
-		Att.value = document.getElementById("url_tag").value;;
+		Att.value = document.getElementById("url_tag").value;
 		Lien.setAttributeNode(Att);
 		var Text = document.createTextNode(texte);
 		Lien.appendChild(Text);
@@ -40,10 +40,26 @@
 	 }
 	 function recharger_canvas(){
 	   ajout_tags('tagsNuage');
-	   ajout_tags('tagsPerso');
+	   LiPerso = ajout_tags('tagsPerso');
+	   
+	   var texte = " Supprimer ce tag";
+	   var Lien = document.createElement("a");
+	   var Att = document.createAttribute("href");
+	   Att.value = "#";
+	   Lien.setAttributeNode(Att);
+	   var AttOnClick = document.createAttribute("onclick");
+	   AttOnClick.value = "supprime(this)";
+	   Lien.setAttributeNode(AttOnClick);
+	   var Text = document.createTextNode(texte);
+	   Lien.appendChild(Text);
+	   LiPerso.appendChild(Lien);
+	   
 	   TagCanvas.Reload('myCanvas');
 	 }
-	  
+	  function supprime(a) {
+		a.parentNode.parentNode.removeChild(a.parentNode);
+	}
+	
     </script>
 </head>
 <body>
@@ -71,11 +87,11 @@
 			<input type="button" value="Clic pour ajouter ce tag" onclick="recharger_canvas();">
 	</fieldset>
     <ul id="tagsPerso">
-      <li><a href="#">Lien 1</a></li>
-      <li><a href="#">Lien 2</a></li>
-      <li><a href="#">Lien 3</a></li>
-      <li><a href="#">Lien 4</a></li>
-      <li><a href="#">Lien 5</a></li>
+      <li><a href="#">Lien 1</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
+      <li><a href="#">Lien 2</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
+      <li><a href="#">Lien 3</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
+      <li><a href="#">Lien 4</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
+      <li><a href="#">Lien 5</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
     </ul>
 
 	<h2>Code à récupérer</h2>
