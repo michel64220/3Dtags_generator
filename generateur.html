@@ -21,6 +21,29 @@
           document.getElementById('myCanvasContainer').style.display = 'none';
         }
       };
+	  
+	  //ajout d'un élément
+	  function ajout_tags(Id) {
+		var texte = 'Lien';
+		var Ul = document.getElementById(Id);
+		var Li = document.createElement("li");
+		var Lien = document.createElement("a");
+		var Att = document.createAttribute("href");
+		Att.value = "#";
+		Lien.setAttributeNode(Att);
+		var Text = document.createTextNode(texte);
+		Lien.appendChild(Text);
+		Li.appendChild(Lien);
+		Ul.appendChild(Li);
+		
+     return Li;
+	 }
+	 function recharger_canvas(){
+	   ajout_tags('tagsNuage');
+	   ajout_tags('tagsPerso');
+	   TagCanvas.Reload('myCanvas');
+	 }
+	  
     </script>
 </head>
 <body>
@@ -31,7 +54,7 @@
       </canvas>
     </div>
     <div id="tags">
-      <ul>
+      <ul id="tagsNuage">
         <li><a href="#">Lien 1</a></li>
         <li><a href="#">Lien 2</a></li>
         <li><a href="#">Lien 3</a></li>
@@ -39,6 +62,18 @@
         <li><a href="#">Lien 5</a></li>
       </ul>
     </div>
+<h1>Personnalisation de votre nuage de tags</h1>
+<h2>Réglages</h2>
+<input type="button" value="Clic pour ajouter ce tag" onclick="recharger_canvas();">
+    <ul id="tagsPerso">
+      <li><a href="#">Lien 1</a></li>
+      <li><a href="#">Lien 2</a></li>
+      <li><a href="#">Lien 3</a></li>
+      <li><a href="#">Lien 4</a></li>
+      <li><a href="#">Lien 5</a></li>
+    </ul>
+
+	<h2>Code à récupérer</h2>
 
 </body>
 </html>
