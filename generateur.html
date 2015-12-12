@@ -56,10 +56,34 @@
 	   
 	   TagCanvas.Reload('myCanvas');
 	 }
-	  function supprime(a) {
-		a.parentNode.parentNode.removeChild(a.parentNode);
-	}
+	  	
 	
+	
+	function supprime(a) {
+		var list = document.getElementById("tagsPerso"),
+		items = list.getElementsByTagName("li");
+
+		list.onclick = function(e) {
+			var evt = e || window.event,
+			src = evt.target || evt.srcElement;
+			var myIndex = findIndex(src.parentNode);
+			var Nuage = document.getElementById("tagsNuage");
+			Nuage.removeChild(Nuage.children[myIndex]);
+			TagCanvas.Start('myCanvas','tags');
+			a.parentNode.parentNode.removeChild(a.parentNode);				
+		};
+
+		function findIndex( elem ) {
+			var i, len = items.length;
+			for(i=0; i<len; i++) {
+				if (items[i]===elem) {
+					return i;
+				}
+			}
+			return -1;
+		}
+	}
+
     </script>
 </head>
 <body>
@@ -86,6 +110,7 @@
 			<label for="url">Entrez l'URL vers lequel pointe votre tag : </label><input id="url_tag" type="text" value="#">
 			<input type="button" value="Clic pour ajouter ce tag" onclick="recharger_canvas();">
 	</fieldset>
+	<p id="demo"></p>
     <ul id="tagsPerso">
       <li><a href="#">Lien 1</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
       <li><a href="#">Lien 2</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
