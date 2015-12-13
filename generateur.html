@@ -16,6 +16,7 @@
             depth: 0.8,
             maxSpeed: 0.05
           });
+		  integre_codeHTML();
         } catch(e) {
           // something went wrong, hide the canvas container
           document.getElementById('myCanvasContainer').style.display = 'none';
@@ -55,6 +56,7 @@
 	   LiPerso.appendChild(Lien);
 	   
 	   TagCanvas.Reload('myCanvas');
+	   integre_codeHTML();
 	 }
 	  	
 	
@@ -70,6 +72,7 @@
 			var Nuage = document.getElementById("tagsNuage");
 			Nuage.removeChild(Nuage.children[myIndex]);
 			TagCanvas.Start('myCanvas','tags');
+			integre_codeHTML();
 			a.parentNode.parentNode.removeChild(a.parentNode);				
 		};
 
@@ -82,26 +85,57 @@
 			}
 			return -1;
 		}
+		
 	}
-
+	function integre_js(Radio) {
+	var dBal = "&gt;", gBal = "&lt;", rBal = '\n';
+	var message = document.getElementById("kasu");
+	switch (Radio.value){
+		case "Saf" :
+			message.style.visibility = 'hidden';
+			ligne = gBal+'!--[if lt IE 9]'+dBal+gBal+'script type="text/javascript" src="excanvas.js">'+gBal+'/script'+dBal+rBal+gBal+'![endif]--'+dBal+rBal+gBal+'script src="tagcanvas.js" type="text/javascript"'+dBal+gBal+'/script'+dBal;
+			break;
+		case "Sam" :
+			message.style.visibility = 'hidden';
+			ligne = gBal+'!--[if lt IE 9]'+dBal+gBal+'script type="text/javascript" src="excanvas.js">'+gBal+'/script'+dBal+rBal+gBal+'![endif]--'+dBal+rBal+gBal+'script src="tagcanvas.min.js" type="text/javascript"'+dBal+gBal+'/script'+dBal;
+			break;
+		case "jF" :
+			message.style.visibility = 'visible';
+			ligne = gBal+'script src="mettez le nom de votre fichier JS jquery ici" type="text/javascript"'+dBal+gBal+'/script'+dBal+rBal;
+			ligne += gBal+'!--[if lt IE 9]'+dBal+gBal+'script type="text/javascript" src="excanvas.js">'+gBal+'/script'+dBal+gBal+'![endif]--'+dBal+rBal+gBal+'script src="jquery.tagcanvas.js" type="text/javascript"'+dBal+gBal+'/script'+dBal;
+			break;
+		case "jM" :
+			message.style.visibility = 'visible';
+			ligne = gBal+'script src="mettez le nom de votre fichier JS jquery ici" type="text/javascript"'+dBal+gBal+'/script'+dBal+rBal;
+			ligne += gBal+'!--[if lt IE 9]'+dBal+gBal+'script type="text/javascript" src="excanvas.js">'+gBal+'/script'+dBal+gBal+'![endif]--'+dBal+rBal+gBal+'script src="jquery.tagcanvas.min.js" type="text/javascript"'+dBal+gBal+'/script'+dBal;
+			break;
+		}
+	document.getElementById("choix_js").innerHTML = ligne;
+	}
+	
+	function integre_codeHTML() {
+	clone = document.getElementById("code");
+	document.getElementById("codeHTML").innerHTML = clone.innerHTML;
+	}
     </script>
 </head>
 <body>
 <h1>Votre nuage de Tags</h1>
-    <div id="myCanvasContainer">
-      <canvas width="300" height="300" id="myCanvas">
-        <p>Cette fonction n'est pas supportée par votre navigateur.</p>
-      </canvas>
-    </div>
-    <div id="tags">
-      <ul id="tagsNuage">
-        <li><a href="#">Lien 1</a></li>
-        <li><a href="#">Lien 2</a></li>
-        <li><a href="#">Lien 3</a></li>
-        <li><a href="#">Lien 4</a></li>
-        <li><a href="#">Lien 5</a></li>
-      </ul>
-    </div>
+<div id="code"><div id="myCanvasContainer">
+	<canvas width="300" height="300" id="myCanvas">
+		<p>Cette fonction n'est pas supportée par votre navigateur.</p>
+	</canvas>
+</div>
+	<div id="tags">
+	  <ul id="tagsNuage">
+		<li><a href="#">Lien 1</a></li>
+		<li><a href="#">Lien 2</a></li>
+		<li><a href="#">Lien 3</a></li>
+		<li><a href="#">Lien 4</a></li>
+		<li><a href="#">Lien 5</a></li>
+	  </ul>
+</div>
+</div>
 <h1>Personnalisation de votre nuage de tags</h1>
 <h2>Réglages</h2>
 	<fieldset>
@@ -110,7 +144,7 @@
 			<label for="url">Entrez l'URL vers lequel pointe votre tag : </label><input id="url_tag" type="text" value="#">
 			<input type="button" value="Clic pour ajouter ce tag" onclick="recharger_canvas();">
 	</fieldset>
-	<p id="demo"></p>
+<h3>Voici la liste des tags</h3>
     <ul id="tagsPerso">
       <li><a href="#">Lien 1</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
       <li><a href="#">Lien 2</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
@@ -119,7 +153,35 @@
       <li><a href="#">Lien 5</a> <a href="#" onclick="supprime(this)">Supprimer ce tag</a></li>
     </ul>
 
-	<h2>Code à récupérer</h2>
-
+	<h2>Installation du nuage sur votre site</h2>
+	<ol>
+		<li>Utilisez l'outils de personnalisation ci-dessus pour créer votre nuage de tags</li>
+		<li>Téléchargez le fichier javascript de votre choix sur <a href="http://www.goat1000.com/tagcanvas.php#links">le site de son auteur</a>
+		<li>Placez le ou les fichiers téléchargés dans le même répertoire que votre page HTML</li>
+		<li>Cochez dans la liste ci-dessous celui que vous avez choisi : <br>
+			<input type="radio" name="lib" value="Saf" onclick="integre_js(this);"> Stand-alone version 2.8, Full source<br>
+			<input type="radio" name="lib" value="Sam" onclick="integre_js(this);">Stand-alone version 2.8, Minified<br>
+			<input type="radio" name="lib" value="jF" onclick="integre_js(this);">jQuery plugin version 2.8, Full source<br>
+			<input type="radio" name="lib" value="jM" onclick="integre_js(this);">jQuery plugin version 2.8, Minified</li>
+		<li>Copiez et collez le code ci-dessous dans le HEAD de votre fichier HTML<br>
+		<textarea id="choix_js" readonly rows="4" cols="100">Vous devez d'abord cocher une case dans l'étape précedente.</textarea>
+			<p id="kasu" style="color:red;visibility:hidden;">Avertissement : vous avez choisi une version qui nécessite d'avoir jquery. Après avoir copié-collé ce code dans votre page HTML, remplacez le texte <em>"mettez le nom de votre fichier JS jquery ici"</em> par le nom de votre fichier Jquery</p>
+		<li>Copiez et collez le code ci-dessous là où vous souhaitez faire apparaître le nuage dans votre page HTML<br>
+			<textarea readonly id="codeHTML" rows="25" cols="100"></textarea>
+		
+		</li>
+		<li>Copiez et collez le code ci-dessous dans le HEAD de votre fichier HTML<br>
+			<textarea readonly id="codeCanvas" rows="25" cols="100"><script type="text/javascript">
+  window.onload = function() {
+    try {
+      TagCanvas.Start('myCanvas');
+    } catch(e) {
+      // something went wrong, hide the canvas container
+      document.getElementById('myCanvasContainer').style.display = 'none';
+    }
+  };
+ </script></textarea>
+		</li>
+	</ol>
 </body>
 </html>
